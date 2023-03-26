@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+import { DIY } from '../../diyModel';
 
 @Component({
   selector: 'app-diyitem',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./diyitem.component.css']
 })
 export class DIYitemComponent {
+
+  @Input() diy: DIY;
+  @Input() index: number;
 
 }

@@ -1,1 +1,11 @@
-<p>diyitem works!</p>
+<a style="cursor: pointer;" routerLinkActive="active" class="list-group-item clearfix">
+    <div class="pull-left">
+        <h4 class="list-group-item-heading">{{diy.name}}</h4>
+    </div>
+    <span class="pull-right">
+        <img class="img-responsive"
+            [src]="diy.imageUrl"
+            alt="{{diy.name}}">
+    </span> 
+    <p>{{diy.externalSiteURL}}</p>               
+</a>

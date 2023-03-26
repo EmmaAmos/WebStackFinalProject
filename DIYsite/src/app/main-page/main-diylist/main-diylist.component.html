@@ -4,7 +4,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">
           <div class="row">
-            <span class="title pad-left-right">Contacts</span>
+            <span class="title pad-left-right">Fun DIY Project For Kids</span>
           </div>
         </div>
       </div>
@@ -13,6 +13,6 @@
   
 <div class="row">
     <div class="col-xs-12">
-        <app-diyitem></app-diyitem>
+        <app-diyitem *ngFor="let diyEl of diy;" [diy]="diyEl"></app-diyitem>
     </div>
 </div>

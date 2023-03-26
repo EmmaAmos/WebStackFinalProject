@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DIY } from '../diyModel';
 
 @Component({
   selector: 'app-main-diylist',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-diylist.component.css']
 })
 export class MainDIYListComponent {
+
+  diy: DIY[];
 
 }
