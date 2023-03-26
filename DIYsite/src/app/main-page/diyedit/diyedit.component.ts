@@ -45,7 +45,6 @@ export class DIYeditComponent {
   onDelete() {
     this.diyService.deleteDIY(this.diy);
     this.router.navigate(['main-page'], {relativeTo: this.route})
-    //route back to the '/documents' URL
  }
 
 
