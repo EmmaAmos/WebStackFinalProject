@@ -9,33 +9,33 @@ import { DIY } from './diyModel';
 export class DIYserviceService {
 
 
-  contactSelected = new Subject<DIY>();
+  diySelected = new Subject<DIY>();
 
-  contactChanged = new Subject<DIY[]>();
+  diyChanged = new Subject<DIY[]>();
 
-  contactChangedEvent = new Subject<DIY[]>();
+  diyChangedEvent = new Subject<DIY[]>();
 
-  contactsListChangedEvent  = new Subject<DIY[]>();
+  diyListChangedEvent  = new Subject<DIY[]>();
 
   startedEditing = new Subject<number>();
 
-  maxContactId!: number;
+  maxDIYId!: number;
 
-  private contacts: DIY[] =[
+  private diy: DIY[] =[
     new DIY ('1','Lego Headwig', '../../assets/images/LegoHeadWig.webp', 'https://www.lego.com/en-us/product/hedwig-pencil-holder-41809'),
     new DIY ('2','Lego Headwig', '../../assets/images/LegoHedgeHogBlue.webp', 'https://www.lego.com/en-us/product/creative-animal-drawer-41805'),
   ];
   
   getDIY(): Observable<DIY[]>{
-    //return this.contacts.slice();
-    return this.http.get<DIY[]>('http://localhost:3000/contacts')
+    //return this.diy.slice();
+    return this.http.get<DIY[]>('http://localhost:3000/diy')
       .pipe(
-        tap((contacts: DIY[]) => {
-          this.contacts = contacts;
-          console.log(contacts)
-          this.maxContactId = this.getMaxId();
-          this.contacts.sort((a, b) => a.name.localeCompare(b.name));
-          this.contactsListChangedEvent.next(this.contacts.slice());
+        tap((diy: DIY[]) => {
+          this.diy = diy;
+          console.log(diy)
+          this.maxDIYId = this.getMaxId();
+          this.diy.sort((a, b) => a.name.localeCompare(b.name));
+          this.diyListChangedEvent.next(this.diy.slice());
         }),
         catchError(error => {
           console.error(error);
@@ -45,9 +45,9 @@ export class DIYserviceService {
   }
 
   getDIYs(id: string) : DIY {
-    for (let contact of this.contacts) {
-      if(contact.id == id) {
-         return contact;
+    for (let diy of this.diy) {
+      if(diy.id == id) {
+         return diy;
       }
     }
     return null!;
@@ -57,8 +57,8 @@ export class DIYserviceService {
     return this.diy[id];
   }
 
-  addDIY(contacts: DIY) {
-    if (!contacts) {
+  addDIY(diy: DIY) {
+    if (!diy) {
       return;
     }
 
@@ -67,64 +67,64 @@ export class DIYserviceService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     // add to database
-    this.http.post<{ message: string, contacts: DIY }>('http://localhost:3000/contacts',
-    contacts,
+    this.http.post<{ message: string, diy: DIY }>('http://localhost:3000/diy',
+    diy,
       { headers: headers })
       .subscribe(
         (responseData) => {
           // add new document to documents
-          this.contacts.push(responseData.contacts);
+          this.diy.push(responseData.diy);
           this.sortAndSend();
         }
       );
   }
 
  
-  updateContact(originalContact: Contact, newContact: Contact) {
-    if (!originalContact || !newContact) {
+  updateDIY(originalDIY: DIY, newDIY: DIY) {
+    if (!originalDIY || !newDIY) {
       return;
     }
 
-    const pos = this.contacts.findIndex(d => d.id === originalContact.id);
+    const pos = this.diy.findIndex(d => d.id === originalDIY.id);
 
     if (pos < 0) {
       return;
     }
 
     // set the id of the new Document to the id of the old Document
-    newContact.id = originalContact.id;
-    newContact._id = originalContact._id;
+    newDIY.id = originalDIY.id;
+    //newDIY._id = originalDIY._id;
 
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     // update database
-    this.http.put('http://localhost:3000/contacts/' + originalContact.id,
-    newContact, { headers: headers })
+    this.http.put('http://localhost:3000/diy/' + originalDIY.id,
+    newDIY, { headers: headers })
       .subscribe(
         (response: any) => {
-          this.contacts[pos] = newContact;
+          this.diy[pos] = newDIY;
           this.sortAndSend();
         }
       );
   }
 
-deleteDIY(contacts: DIY) {
+deleteDIY(diy: DIY) {
 
-  if (!contacts) {
+  if (!diy) {
     return;
   }
 
-  const pos = this.contacts.findIndex(d => d.id === contacts.id);
+  const pos = this.diy.findIndex(d => d.id === diy.id);
 
   if (pos < 0) {
     return;
   }
 
   // delete from database
-  this.http.delete('http://localhost:3000/contacts/' + contacts.id)
+  this.http.delete('http://localhost:3000/diy/' + diy.id)
     .subscribe(
       (response: any) => {
-        this.contacts.splice(pos, 1);
+        this.diy.splice(pos, 1);
         this.sortAndSend();
       }
     );
@@ -132,8 +132,8 @@ deleteDIY(contacts: DIY) {
 
   getMaxId(): number {
     let maxId = 0;
-    for (let contact of this.contacts) {
-        let currentId = parseInt(contact.id);
+    for (let diy of this.diy) {
+        let currentId = parseInt(diy.id);
         if (currentId > maxId) {
         maxId = currentId;
         }
@@ -142,7 +142,7 @@ deleteDIY(contacts: DIY) {
   }
 
   sortAndSend(){
-    this.contacts.sort((a,b)=>{
+    this.diy.sort((a,b)=>{
       if (a.name < b.name) {
         return -1;
       }
@@ -151,11 +151,11 @@ deleteDIY(contacts: DIY) {
       }
       return 0;
     });
-    this.contactsListChangedEvent.next(this.contacts.slice())
+    this.diyListChangedEvent.next(this.diy.slice())
   }
 
   constructor(private http: HttpClient){
-    this.maxContactId = this.getMaxId();
+    this.maxDIYId = this.getMaxId();
   }
 
 
