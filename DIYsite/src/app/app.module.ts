@@ -6,9 +6,10 @@ import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { MainDIYListComponent } from './main-page/main-diylist/main-diylist.component';
 import { DIYitemComponent } from './main-page/main-diylist/diyitem/diyitem.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DIYdetailComponent } from './main-page/diydetail/diydetail.component';
 import { DIYeditComponent } from './main-page/diyedit/diyedit.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,9 @@ import { DIYeditComponent } from './main-page/diyedit/diyedit.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
