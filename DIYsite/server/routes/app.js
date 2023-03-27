@@ -4,7 +4,7 @@ var path = require('path'); // Include the path module
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.sendFile(path.join(__dirname, 'dist/Lesson2/index.html'));
+  res.sendFile(path.join(__dirname, 'dist/DIYsite/index.html'));
 });
 
 module.exports = router;

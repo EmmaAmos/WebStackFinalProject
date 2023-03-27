@@ -1,34 +1,33 @@
 const sequenceGenerator = require('./sequenceGenerator');
-const Contact = require('../models/contact');
+const DIY = require('../models/diy');
 var express = require('express');
 var router = express.Router();
 
+
 router.get('/', async (req, res, next) => {
     try {
-       const contacts = await Contact.find();
-       return res.status(200).json({ contacts });
+       const diy = await DIY.find();
+       return res.status(200).json({ diy });
     } catch (error) {
        return res.status(500).json({ error });
     }
  });
 
  router.post('/', (req, res, next) => {
-   const maxContactId = sequenceGenerator.nextId("contacts");
+   const maxDIYId = sequenceGenerator.nextId("diy");
  
-   const contacts = new Contact({
-     id: maxContactId,
+   const diy = new DIY({
+     id: maxDIYId,
      name: req.body.name,
-     email: req.body.email,
-     phone: req.body.phone,
+     externalSiteURL: req.body.externalSiteURL,
      imageUrl: req.body.imageUrl,
-     group: req.body.group
    });
  
-   contacts.save()
-     .then(createdContact => {
+   diy.save()
+     .then(createdDIY => {
        res.status(201).json({
-         message: 'Contact added successfully',
-         contacts: createdContact
+         message: 'DIY added successfully',
+         diy: createdDIY
        });
      })
      .catch(error => {
@@ -41,18 +40,16 @@ router.get('/', async (req, res, next) => {
 
 
  router.put('/:id', (req, res, next) => {
-  Contact.findOne({ id: req.params.id })
-    .then(contacts => {
-      contacts.name = req.body.name;
-      contacts.email = req.body.email;
-      contacts.phone = req.body.phone;
-      contacts.imageUrl = req.body.imageUrl;
-      contacts.group = req.body.group;
+  DIY.findOne({ id: req.params.id })
+    .then(diy => {
+      diy.name = req.body.name;
+      diy.externalSiteURL = req.body.externalSiteURL;
+      diy.imageUrl = req.body.imageUrl;
 
-      Contact.updateOne({ id: req.params.id }, contacts)
+      DIY.updateOne({ id: req.params.id }, diy)
         .then(result => {
           res.status(204).json({
-            message: 'Contact updated successfully'
+            message: 'DIY updated successfully'
           })
         })
         .catch(error => {
@@ -64,20 +61,20 @@ router.get('/', async (req, res, next) => {
     })
     .catch(error => {
       res.status(500).json({
-        message: 'Contact not found.',
-        error: {contacts: 'Contact not found'}
+        message: 'DIY not found.',
+        error: {diy: 'DIY not found'}
       });
     });
 });
 
 
 router.delete("/:id", (req, res, next) => {
-  Contact.findOne({ id: req.params.id })
-    .then(contact => { //should this be Contact, on contact?
-      Contact.deleteOne({ id: req.params.id })
+  DIY.findOne({ id: req.params.id })
+    .then(diy => {
+      DIY.deleteOne({ id: req.params.id })
         .then(result => {
           res.status(204).json({
-            message: "Contact deleted successfully"
+            message: "DIY deleted successfully"
           });
         })
         .catch(error => {
@@ -89,8 +86,8 @@ router.delete("/:id", (req, res, next) => {
     })
     .catch(error => {
       res.status(500).json({
-        message: 'Contact not found.',
-        error: { contact: 'Contact not found'}
+        message: 'DIY not found.',
+        error: { diy: 'DIY not found'}
       });
     });
 });
@@ -98,12 +95,12 @@ router.delete("/:id", (req, res, next) => {
 
 
 router.get('/', (req, res, next) => {
-  Contact.find()
+  DIY.find()
     .populate('group')
-    .then(contacts => {
+    .then(diy => {
       res.status(200).json({
-          message: 'Contacts fetched successfully!',
-          contacts: contacts
+          message: 'DIY fetched successfully!',
+          diy: diy
         });
     })
     .catch(error => {

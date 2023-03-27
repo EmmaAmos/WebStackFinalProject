@@ -1,8 +1,6 @@
 var Sequence = require('../models/sequence');
 
-var maxDocumentId;
-var maxMessageId;
-var maxContactId;
+var maxDIYId;
 var sequenceId = null;
 
 function SequenceGenerator(Sequence) {
@@ -16,9 +14,7 @@ function SequenceGenerator(Sequence) {
         });
       }
       sequenceId = sequence._id;
-      maxDocumentId = sequence.maxDocumentId;
-      maxMessageId = sequence.maxMessageId;
-      maxContactId = sequence.maxContactId;
+      maxDIYId = sequence.maxDIYId;
     });
 }
 
@@ -28,20 +24,10 @@ SequenceGenerator.prototype.nextId = function(collectionType) {
   var nextId;
 
   switch (collectionType) {
-    case 'documents':
-      maxDocumentId++;
-      updateObject = {maxDocumentId: maxDocumentId};
-      nextId = maxDocumentId;
-      break;
-    case 'messages':
-      maxMessageId++;
-      updateObject = {maxMessageId: maxMessageId};
-      nextId = maxMessageId;
-      break;
-    case 'contacts':
-      maxContactId++;
-      updateObject = {maxContactId: maxContactId};
-      nextId = maxContactId;
+    case 'diy':
+      maxDIYId++;
+      updateObject = {maxDIYId: maxDIYId};
+      nextId = maxDIYId;
       break;
     default:
       return -1;
