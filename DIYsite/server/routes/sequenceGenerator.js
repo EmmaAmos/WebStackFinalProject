@@ -1,22 +1,25 @@
+//robo code
 var Sequence = require('../models/sequence');
 
 var maxDIYId;
-var sequenceId = null;
+var sequenceId;
 
-function SequenceGenerator(Sequence) {
-
-  Sequence.findOne()
-    .exec(function(err, sequence) {
-      if (err) {
-        return res.status(500).json({
-          title: 'An error occurred',
-          error: err
-        });
-      }
-      sequenceId = sequence._id;
-      maxDIYId = sequence.maxDIYId;
-    });
+function SequenceGenerator() {
+  Sequence.findOne().exec(function(err, sequence) {
+    console.log(arguments)
+    if (err) {
+      console.error(err);
+      return;
+    }
+    if (!sequence) {
+      console.error("No sequence found");
+      return;
+    }
+    sequenceId = sequence._id;
+    maxDIYId = sequence.maxDIYId;
+  });
 }
+// robo ends
 
 SequenceGenerator.prototype.nextId = function(collectionType) {
   console.log('SequenceGenerator.prototype.nextId is working')
