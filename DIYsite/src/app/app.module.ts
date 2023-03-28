@@ -9,7 +9,10 @@ import { DIYitemComponent } from './main-page/main-diylist/diyitem/diyitem.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DIYdetailComponent } from './main-page/diydetail/diydetail.component';
 import { DIYeditComponent } from './main-page/diyedit/diyedit.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { SerchPipPipe } from './main-page/serch-pip.pipe';
+import { HeaderComponent } from './header/header.component';
+import { OtherCraftsComponent } from './other-crafts/other-crafts.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MainDIYListComponent,
     DIYitemComponent,
     DIYdetailComponent,
-    DIYeditComponent
+    DIYeditComponent,
+    SerchPipPipe,
+    HeaderComponent,
+    OtherCraftsComponent
   ],
   imports: [
     BrowserModule,

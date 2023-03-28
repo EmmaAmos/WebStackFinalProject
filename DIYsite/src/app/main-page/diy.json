@@ -1,0 +1,23 @@
+[	
+	{
+		"_id":"58c767386f1d58ebc37af1e9",
+		"id": "1",
+		"name": "Lego Headwig",
+		"imageUrl": "../assets/images/LegoHeadWig.webp",
+		"externalSiteURL": "https://www.lego.com/en-us/product/hedwig-pencil-holder-41809"
+	},
+	{
+		"_id":"58c767386f1d58ebc37af1ea",
+		"id": "2",
+		"name": "Lego Hedgehog",
+		"imageUrl": "../assets/images/LegoHedgeHogBlue.webp",
+		"externalSiteURL": "https://www.lego.com/en-us/product/creative-animal-drawer-41805"
+	},
+	{
+		"_id":"58c767386f1d58ebc37af1eb",
+		"id": "3",
+		"name": "Lego Sign",
+		"imageUrl": "../assets/images/signDIY.webp",
+		"externalSiteURL": "https://www.lego.com/en-us/product/message-board-41951"
+	}
+]

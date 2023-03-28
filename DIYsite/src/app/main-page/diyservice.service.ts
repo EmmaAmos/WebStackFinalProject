@@ -23,10 +23,10 @@ export class DIYserviceService {
 
   private diy: DIY[] =[
     new DIY ('1','Lego Headwig', '../../assets/images/LegoHeadWig.webp', 'https://www.lego.com/en-us/product/hedwig-pencil-holder-41809'),
-    new DIY ('2','Lego Headwig', '../../assets/images/LegoHedgeHogBlue.webp', 'https://www.lego.com/en-us/product/creative-animal-drawer-41805'),
+    new DIY ('2','Lego Hedgehog', '../../assets/images/LegoHedgeHogBlue.webp', 'https://www.lego.com/en-us/product/creative-animal-drawer-41805'),
   ];
   
-  getDIY(): Observable<DIY[]>{
+  getDIYs(): Observable<DIY[]>{
     //return this.diy.slice();
     return this.http.get<DIY[]>('http://localhost:3000/diy')
       .pipe(
@@ -44,7 +44,7 @@ export class DIYserviceService {
       );
   }
 
-  getDIYs(id: string) : DIY {
+  getDIY(id: string) : DIY {
     for (let diy of this.diy) {
       if(diy.id == id) {
          return diy;

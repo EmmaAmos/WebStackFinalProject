@@ -77,8 +77,7 @@ export class DIYeditComponent {
       this.diyService.addDIY(newDIY);
       console.log('Addition Succsess')
     }
-    console.log(this.diyService.getDIYs(this.id))
-    this.router.navigate(['/main-paage']);
+    this.router.navigate(['/main-page']);
   }
 
 

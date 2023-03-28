@@ -9,7 +9,11 @@
       </div>
     </div>
 </div>
-  
+<br>
+<input class="form-control" type="text" #searchBox onkeyup="search(searchBox.value)" placeholder="Enter a search value">
+<div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
+<br>
+<br>
 <div class="row">
     <div class="col-xs-12">
         <app-diyitem *ngFor="let diyEl of diy;" [diy]="diyEl"></app-diyitem>
