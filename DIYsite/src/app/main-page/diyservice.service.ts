@@ -8,7 +8,6 @@ import { DIY } from './diyModel';
 })
 export class DIYserviceService {
 
-
   diySelected = new Subject<DIY>();
 
   diyChanged = new Subject<DIY[]>();
@@ -49,7 +48,7 @@ export class DIYserviceService {
   }
   */
   getDIYs(): Observable<DIY[]> {
-    return this.http.get<DIY[]>('http://localhost:3000/diy').pipe(
+    return this.http.get<DIY[]>('http://localhost:27017/diy').pipe(
       map((diy: DIY[]) => {
         return diy.map(d => new DIY(d.id, d.name, d.externalSiteURL, d.imageUrl));
       }),
@@ -83,7 +82,7 @@ export class DIYserviceService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     // add to database
-    this.http.post<{ message: string, diy: DIY }>('http://localhost:3000/diy',
+    this.http.post<{ message: string, diy: DIY }>('http://localhost:27017/diy',
     diy,
       { headers: headers })
       .subscribe(
@@ -114,7 +113,7 @@ export class DIYserviceService {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
 
     // update database
-    this.http.put('http://localhost:3000/diy/' + originalDIY.id,
+    this.http.put('http://localhost:27017/diy/' + originalDIY.id,
     newDIY, { headers: headers })
       .subscribe(
         (response: any) => {
@@ -137,7 +136,7 @@ deleteDIY(diy: DIY) {
   }
 
   // delete from database
-  this.http.delete('http://localhost:3000/diy/' + diy.id)
+  this.http.delete('http://localhost:27017/diy/' + diy.id)
     .subscribe(
       (response: any) => {
         this.diy.splice(pos, 1);
