@@ -10,10 +10,10 @@ import { OtherCraftsComponent } from './other-crafts/other-crafts.component';
 const routes: Routes = [
   { path: '', redirectTo: '/main-page', pathMatch:'full' },
   { path: 'main-page', component: MainPageComponent, children:[ 
-    {path: 'newDIY', component: DIYdetailComponent}, {path: 'new', component: DIYeditComponent}, {path: ':id', component: DIYdetailComponent}, {path: ':id/edit', component: DIYeditComponent} 
+    {path: 'newDIY', component: DIYeditComponent}, {path: 'new', component: DIYeditComponent}, {path: ':id', component: DIYdetailComponent}, {path: ':id/edit', component: DIYeditComponent} 
   ]},
   { path: 'otherCrafts', component: OtherCraftsComponent, children:[ 
-    {path: 'newDIY', component: DIYdetailComponent}, {path: 'new', component: DIYeditComponent}, {path: ':id', component: DIYdetailComponent}, {path: ':id/edit', component: DIYeditComponent} 
+    {path: 'newDIY', component: DIYeditComponent}, {path: 'new', component: DIYeditComponent}, {path: ':id', component: DIYdetailComponent}, {path: ':id/edit', component: DIYeditComponent} 
   ]},
 
 ];

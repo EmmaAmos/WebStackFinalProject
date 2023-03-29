@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, Subject, tap, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, Observable, Subject, tap, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { DIY } from './diyModel';
 
 @Injectable({
@@ -28,25 +28,6 @@ export class DIYserviceService {
   
   /*
   getDIYs(): Observable<DIY[]>{
-    //return this.diy.slice();
-    return this.http.get<DIY[]>('http://localhost:3000/diy')
-      .pipe(
-        tap((diy: DIY[]) => {
-          this.diy = diy;
-          console.log(diy)
-          this.maxDIYId = this.getMaxId();
-          this.diy.sort((a, b) => a.name.localeCompare(b.name));
-          this.diyListChangedEvent.next(this.diy.slice());
-        }),
-        catchError(error => {
-          console.error(error);
-          return throwError(error);
-        })
-      );
-  }
-  */
-
-  getDIYs(): Observable<DIY[]>{
     return this.http.get<DIY[]>('http://localhost:3000/diy')
       .pipe(
         tap((diy: DIY[]) => {
@@ -65,6 +46,18 @@ export class DIYserviceService {
           return throwError(error);
         })
       );
+  }
+  */
+  getDIYs(): Observable<DIY[]> {
+    return this.http.get<DIY[]>('http://localhost:3000/diy').pipe(
+      map((diy: DIY[]) => {
+        return diy.map(d => new DIY(d.id, d.name, d.externalSiteURL, d.imageUrl));
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error(error);
+        return throwError(error);
+      })
+    );
   }
 
   getDIY(id: string) : DIY {
