@@ -26,12 +26,12 @@ export class MainDIYListComponent implements OnInit{
         this.diy = diy;
       },
       (error: any) => {
-        console.error('Error fetching contacts: ', error);
+        console.error('Error fetching DIY: ', error);
       }
     );
   }
 
-    onNewContact() {
+    onNewDIY() {
       this.router.navigate(['newDIY'], {relativeTo: this.route});
       this.editMode = true;
       console.log('this is the state of this edit mode'+ this.editMode)

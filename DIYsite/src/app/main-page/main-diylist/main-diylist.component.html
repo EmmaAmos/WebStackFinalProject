@@ -1,21 +1,26 @@
 <div class="row">
-    <div class="col-xs-12">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="row">
-            <span class="title pad-left-right">Fun DIY Project For Kids</span>
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="row">
+          <span class="title pad-left-right"> Kid's DIY Projects</span>
+        </div>
+        <div class="row">
+          <div class="input-group pull-left pad-left-right col-xs-7">
+            <input class="form-control" type="text" #searchBox onkeyup="search(searchBox.value)" placeholder="Enter a search value">
+            <div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
+          </div>
+          <div class="pull-right pad-left-right">
+            <a class="btn btn-success" [routerLink]="['newDIY']">New DIY</a>
           </div>
         </div>
       </div>
     </div>
+  </div>
 </div>
-<br>
-<input class="form-control" type="text" #searchBox onkeyup="search(searchBox.value)" placeholder="Enter a search value">
-<div class="glyphicon glyphicon-search input-group-addon" (click)="search(searchBox.value)"></div>
-<br>
-<br>
+
 <div class="row">
-    <div class="col-xs-12">
-        <app-diyitem *ngFor="let diyEl of diy;" [diy]="diyEl"></app-diyitem>
-    </div>
+  <div class="col-xs-12">
+    <app-diyitem *ngFor="let diyEl of diy;" [diy]="diyEl"></app-diyitem>
+</div>
 </div>

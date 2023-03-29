@@ -26,6 +26,7 @@ export class DIYserviceService {
     new DIY ('2','Lego Hedgehog', '../../assets/images/LegoHedgeHogBlue.webp', 'https://www.lego.com/en-us/product/creative-animal-drawer-41805'),
   ];
   
+  /*
   getDIYs(): Observable<DIY[]>{
     //return this.diy.slice();
     return this.http.get<DIY[]>('http://localhost:3000/diy')
@@ -36,6 +37,28 @@ export class DIYserviceService {
           this.maxDIYId = this.getMaxId();
           this.diy.sort((a, b) => a.name.localeCompare(b.name));
           this.diyListChangedEvent.next(this.diy.slice());
+        }),
+        catchError(error => {
+          console.error(error);
+          return throwError(error);
+        })
+      );
+  }
+  */
+
+  getDIYs(): Observable<DIY[]>{
+    return this.http.get<DIY[]>('http://localhost:3000/diy')
+      .pipe(
+        tap((diy: DIY[]) => {
+          this.diy = diy.map(diy => new DIY(
+            diy.id,
+            diy.name,
+            diy.externalSiteURL,
+            diy.imageUrl,            
+          ));
+          console.log(this.diy);
+          this.maxDIYId = this.getMaxId();
+          this.sortAndSend();
         }),
         catchError(error => {
           console.error(error);
