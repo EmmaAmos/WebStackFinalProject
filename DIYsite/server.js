@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
+const cors = require('cors');
 
 
 // import the routing file to handle the default (index) route
@@ -23,7 +24,7 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
-
+app.use(cors());
 app.use(logger('dev')); // Tell express to use the Morgan logger
 
 // Add support for CORS
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
   );
   next();
 });
+
 
 // Tell express to use the specified director as the
 // root directory for your web site
